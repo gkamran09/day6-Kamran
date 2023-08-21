@@ -8,11 +8,12 @@ public class WordFrequencyGame {
     public static final String NEW_LINE_DELIMITER = "\n";
     public static final String SPACE_CHAR = " ";
     public static final String CALCULATE_ERROR = "Calculate Error";
+    public static final String SET_NUMBER_ONE = " 1";
 
     public String getResult(String inputStr) {
 
         if (inputStr.split(SPACE_DELIMITER).length == 1) {
-            return inputStr + " 1";
+            return inputStr + SET_NUMBER_ONE;
         } else {
 
             try {
