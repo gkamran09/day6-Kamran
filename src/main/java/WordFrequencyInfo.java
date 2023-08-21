@@ -12,7 +12,7 @@ public class WordFrequencyInfo {
         return this.value;
     }
 
-    public int getWordCount() {
+    public int getWord() {
         return this.count;
     }
 

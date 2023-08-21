@@ -2,12 +2,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
     public static final String SPACE_DELIMITER = "\\s+";
     public static final String NEW_LINE_DELIMITER = "\n";
     public static final String SPACE_CHAR = " ";
+    public static final String CALCULATE_ERROR = "Calculate Error";
 
     public String getResult(String inputStr) {
 
@@ -32,22 +33,19 @@ public class WordFrequencyGame {
                 }
                 wordFrequencyInfoList = frequencyInfos;
 
-                wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
+                wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWord() - firstWord.getWord());
 
                 return generatePrintLines(wordFrequencyInfoList);
             } catch (Exception e) {
-                return "Calculate Error";
+                return CALCULATE_ERROR;
             }
         }
     }
 
     private static String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
-        StringJoiner joiner = new StringJoiner(NEW_LINE_DELIMITER);
-        for (WordFrequencyInfo word : wordFrequencyInfoList) {
-            String s = word.getValue() + SPACE_CHAR + word.getWordCount();
-            joiner.add(s);
-        }
-        return joiner.toString();
+        return wordFrequencyInfoList.stream()
+                .map(word -> word.getValue() + SPACE_CHAR + word.getWord())
+                .collect(Collectors.joining(NEW_LINE_DELIMITER));
     }
 
     private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
