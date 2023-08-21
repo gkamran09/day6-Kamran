@@ -17,29 +17,29 @@ public class WordFrequencyGame {
             try {
 
                 //split the input string with 1 to n pieces of spaces
-                String[] arr = inputStr.split("\\s+");
+                String[] words = inputStr.split("\\s+");
 
                 List<WordFrequencyInfo> wordFrequencyInfoList = new ArrayList<>();
-                for (String s : arr) {
-                    WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(s, 1);
+                for (String word : words) {
+                    WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(word, 1);
                     wordFrequencyInfoList.add(wordFrequencyInfo);
                 }
 
-                //get the map for the next step of sizing the same word
-                Map<String, List<WordFrequencyInfo>> map = getListMap(wordFrequencyInfoList);
+                //get the wordFrequencyMap for the next step of sizing the same word
+                Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
 
-                List<WordFrequencyInfo> list = new ArrayList<>();
-                for (Map.Entry<String, List<WordFrequencyInfo>> entry : map.entrySet()) {
+                List<WordFrequencyInfo> frequencyInfos = new ArrayList<>();
+                for (Map.Entry<String, List<WordFrequencyInfo>> entry : wordFrequencyMap.entrySet()) {
                     WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(entry.getKey(), entry.getValue().size());
-                    list.add(wordFrequencyInfo);
+                    frequencyInfos.add(wordFrequencyInfo);
                 }
-                wordFrequencyInfoList = list;
+                wordFrequencyInfoList = frequencyInfos;
 
-                wordFrequencyInfoList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+                wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
 
                 StringJoiner joiner = new StringJoiner(NEW_LINE_DELIMITER);
-                for (WordFrequencyInfo w : wordFrequencyInfoList) {
-                    String s = w.getValue() + " " + w.getWordCount();
+                for (WordFrequencyInfo word : wordFrequencyInfoList) {
+                    String s = word.getValue() + " " + word.getWordCount();
                     joiner.add(s);
                 }
                 return joiner.toString();
