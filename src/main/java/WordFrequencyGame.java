@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,14 +21,19 @@ public class WordFrequencyGame {
             List<WordFrequencyInfo> wordFrequencyInfoList = createWordFrequencyInfoList(words);
             Map<String, List<WordFrequencyInfo>> wordFrequencyMap = initializeListMap(wordFrequencyInfoList);
             wordFrequencyInfoList = extractWordFrequencyInfo(wordFrequencyMap);
-            wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWord() - firstWord.getWord());
 
-            return generatePrintLines(wordFrequencyInfoList);
+            List<WordFrequencyInfo> sortedFrequencyInfoList = sortFrequencyInfoList(wordFrequencyInfoList);
+            return generatePrintLines(sortedFrequencyInfoList);
 
         } catch (Exception e) {
             return CALCULATE_ERROR;
         }
 
+    }
+    private List<WordFrequencyInfo> sortFrequencyInfoList(List<WordFrequencyInfo> wordFrequencyInfoList) {
+        return wordFrequencyInfoList.stream()
+                .sorted(Comparator.comparingInt(WordFrequencyInfo::getWord).reversed())
+                .collect(Collectors.toList());
     }
 
     private List<WordFrequencyInfo> extractWordFrequencyInfo(Map<String, List<WordFrequencyInfo>> wordFrequencyMap) {
