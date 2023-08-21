@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -47,20 +46,9 @@ public class WordFrequencyGame {
                 .map(word -> word.getValue() + SPACE_CHAR + word.getWord())
                 .collect(Collectors.joining(NEW_LINE_DELIMITER));
     }
-
-    private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
-        Map<String, List<WordFrequencyInfo>> map = new HashMap<>();
-        for (WordFrequencyInfo wordFrequencyInfo : wordFrequencyInfoList) {
-            if (!map.containsKey(wordFrequencyInfo.getValue())) {
-                ArrayList arr = new ArrayList<>();
-                arr.add(wordFrequencyInfo);
-                map.put(wordFrequencyInfo.getValue(), arr);
-            } else {
-                map.get(wordFrequencyInfo.getValue()).add(wordFrequencyInfo);
-            }
-        }
-        return map;
+    private Map<String, List<WordFrequencyInfo>>getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
+        return wordFrequencyInfoList.stream()
+                .collect(Collectors.groupingBy(WordFrequencyInfo::getValue, Collectors.toList()));
     }
-
 
 }
