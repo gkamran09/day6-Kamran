@@ -18,10 +18,7 @@ public class WordFrequencyGame {
         } else {
             try {
                 List<WordFrequencyInfo> wordFrequencyInfoList = new ArrayList<>();
-                for (String word : words) {
-                    WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(word, 1);
-                    wordFrequencyInfoList.add(wordFrequencyInfo);
-                }
+                extracted(words, wordFrequencyInfoList);
                 Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
 
                 List<WordFrequencyInfo> frequencyInfo = new ArrayList<>();
@@ -37,6 +34,13 @@ public class WordFrequencyGame {
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
+        }
+    }
+
+    private static void extracted(String[] words, List<WordFrequencyInfo> wordFrequencyInfoList) {
+        for (String word : words) {
+            WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(word, 1);
+            wordFrequencyInfoList.add(wordFrequencyInfo);
         }
     }
 
