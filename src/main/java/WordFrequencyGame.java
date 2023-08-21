@@ -16,34 +16,38 @@ public class WordFrequencyGame {
         if (words.length == 1) {
             return inputString + SET_NUMBER_ONE;
         }
-            try {
-                List<WordFrequencyInfo> wordFrequencyInfoList = createWordFrequencyInfoList(words);
-                Map<String, List<WordFrequencyInfo>> wordFrequencyMap = initializeListMap(wordFrequencyInfoList);
-                wordFrequencyInfoList = extractWordFrequencyInfo(wordFrequencyMap);
-                wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWord() - firstWord.getWord());
+        try {
+            List<WordFrequencyInfo> wordFrequencyInfoList = createWordFrequencyInfoList(words);
+            Map<String, List<WordFrequencyInfo>> wordFrequencyMap = initializeListMap(wordFrequencyInfoList);
+            wordFrequencyInfoList = extractWordFrequencyInfo(wordFrequencyMap);
+            wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWord() - firstWord.getWord());
 
-                return generatePrintLines(wordFrequencyInfoList);
+            return generatePrintLines(wordFrequencyInfoList);
 
-            } catch (Exception e) {
-                return CALCULATE_ERROR;
-            }
+        } catch (Exception e) {
+            return CALCULATE_ERROR;
+        }
 
     }
+
     private List<WordFrequencyInfo> extractWordFrequencyInfo(Map<String, List<WordFrequencyInfo>> wordFrequencyMap) {
         return wordFrequencyMap.entrySet().stream()
                 .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
                 .collect(Collectors.toList());
     }
-    private List<WordFrequencyInfo>createWordFrequencyInfoList(String[] words) {
+
+    private List<WordFrequencyInfo> createWordFrequencyInfoList(String[] words) {
         return Arrays.stream(words)
                 .map(word -> new WordFrequencyInfo(word, 1))
                 .collect(Collectors.toList());
     }
+
     private static String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
         return wordFrequencyInfoList.stream()
                 .map(word -> word.getValue() + SPACE_CHAR + word.getWord())
                 .collect(Collectors.joining(NEW_LINE_DELIMITER));
     }
+
     private Map<String, List<WordFrequencyInfo>> initializeListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
         return wordFrequencyInfoList.stream()
                 .collect(Collectors.groupingBy(WordFrequencyInfo::getValue, Collectors.toList()));
