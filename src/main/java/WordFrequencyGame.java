@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
@@ -23,8 +20,7 @@ public class WordFrequencyGame {
                 List<WordFrequencyInfo> frequencyInfo = new ArrayList<>();
                 addWordFrequencyInfoToList(wordFrequencyMap, frequencyInfo);
                 wordFrequencyInfoList = frequencyInfo;
-                wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWord() - firstWord.getWord());
-
+                List<WordFrequencyInfo> sortedFrequencyInfoList = extractAndSortWordFrequencyInfo(wordFrequencyMap);
                 return generatePrintLines(wordFrequencyInfoList);
 
             } catch (Exception e) {
@@ -33,11 +29,19 @@ public class WordFrequencyGame {
 
     }
 
-    private static void addWordFrequencyInfoToList(Map<String, List<WordFrequencyInfo>> wordFrequencyMap, List<WordFrequencyInfo> frequencyInfo) {
-        for (Map.Entry<String, List<WordFrequencyInfo>> entry : wordFrequencyMap.entrySet()) {
-            WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(entry.getKey(), entry.getValue().size());
-            frequencyInfo.add(wordFrequencyInfo);
-        }
+    private List<WordFrequencyInfo> addWordFrequencyInfoToList(Map<String, List<WordFrequencyInfo>> wordFrequencyMap, List<WordFrequencyInfo> frequencyInfoList) {
+        return wordFrequencyMap.entrySet().stream()
+                .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
+                .collect(Collectors.toList());
+    }
+
+    private List<WordFrequencyInfo> extractAndSortWordFrequencyInfo(Map<String, List<WordFrequencyInfo>> wordFrequencyMap) {
+        List<WordFrequencyInfo> frequencyInfoList = new ArrayList<>();
+        addWordFrequencyInfoToList(wordFrequencyMap, frequencyInfoList);
+
+        return frequencyInfoList.stream()
+                .sorted(Comparator.comparingInt(WordFrequencyInfo::getWord).reversed())
+                .collect(Collectors.toList());
     }
 
     private List<WordFrequencyInfo>createWordFrequencyInfoList(String[] words) {
