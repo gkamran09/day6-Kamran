@@ -11,18 +11,17 @@ public class WordFrequencyGame {
     public static final String CALCULATE_ERROR = "Calculate Error";
     public static final String SET_NUMBER_ONE = " 1";
 
-    public String getResult(String inputStr) {
+    public String getResult(String inputString) {
 
-        String[] words = inputStr.split(SPACE_DELIMITER);
+        String[] words = inputString.split(SPACE_DELIMITER);
         if (words.length == 1) {
-            return inputStr + SET_NUMBER_ONE;
+            return inputString + SET_NUMBER_ONE;
         }
             try {
                 List<WordFrequencyInfo> wordFrequencyInfoList = createWordFrequencyInfoList(words);
                 Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
-
                 List<WordFrequencyInfo> frequencyInfo = new ArrayList<>();
-                extracted(wordFrequencyMap, frequencyInfo);
+                extractAndAddWordFrequencyInfo(wordFrequencyMap, frequencyInfo);
                 wordFrequencyInfoList = frequencyInfo;
                 wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWord() - firstWord.getWord());
 
@@ -34,7 +33,7 @@ public class WordFrequencyGame {
 
     }
 
-    private static void extracted(Map<String, List<WordFrequencyInfo>> wordFrequencyMap, List<WordFrequencyInfo> frequencyInfo) {
+    private static void extractAndAddWordFrequencyInfo(Map<String, List<WordFrequencyInfo>> wordFrequencyMap, List<WordFrequencyInfo> frequencyInfo) {
         for (Map.Entry<String, List<WordFrequencyInfo>> entry : wordFrequencyMap.entrySet()) {
             WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(entry.getKey(), entry.getValue().size());
             frequencyInfo.add(wordFrequencyInfo);
