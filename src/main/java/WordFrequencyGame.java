@@ -16,7 +16,7 @@ public class WordFrequencyGame {
         String[] words = inputStr.split(SPACE_DELIMITER);
         if (words.length == 1) {
             return inputStr + SET_NUMBER_ONE;
-        } else {
+        }
             try {
                 List<WordFrequencyInfo> wordFrequencyInfoList = createWordFrequencyInfoList(words);
                 Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
@@ -31,10 +31,11 @@ public class WordFrequencyGame {
                 wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWord() - firstWord.getWord());
 
                 return generatePrintLines(wordFrequencyInfoList);
+
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
-        }
+
     }
 
     private List<WordFrequencyInfo>createWordFrequencyInfoList(String[] words) {
@@ -42,8 +43,6 @@ public class WordFrequencyGame {
                 .map(word -> new WordFrequencyInfo(word, 1))
                 .collect(Collectors.toList());
     }
-
-
     private static String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
         return wordFrequencyInfoList.stream()
                 .map(word -> word.getValue() + SPACE_CHAR + word.getWord())
