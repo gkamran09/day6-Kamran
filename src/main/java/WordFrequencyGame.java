@@ -15,7 +15,6 @@ public class WordFrequencyGame {
         if (inputStr.split(SPACE_DELIMITER).length == 1) {
             return inputStr + SET_NUMBER_ONE;
         } else {
-
             try {
                 String[] words = inputStr.split(SPACE_DELIMITER);
 
@@ -26,12 +25,12 @@ public class WordFrequencyGame {
                 }
                 Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
 
-                List<WordFrequencyInfo> frequencyInfos = new ArrayList<>();
+                List<WordFrequencyInfo> frequencyInfo = new ArrayList<>();
                 for (Map.Entry<String, List<WordFrequencyInfo>> entry : wordFrequencyMap.entrySet()) {
                     WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(entry.getKey(), entry.getValue().size());
-                    frequencyInfos.add(wordFrequencyInfo);
+                    frequencyInfo.add(wordFrequencyInfo);
                 }
-                wordFrequencyInfoList = frequencyInfos;
+                wordFrequencyInfoList = frequencyInfo;
 
                 wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWord() - firstWord.getWord());
 
