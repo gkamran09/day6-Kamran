@@ -19,7 +19,7 @@ public class WordFrequencyGame {
         }
             try {
                 List<WordFrequencyInfo> wordFrequencyInfoList = createWordFrequencyInfoList(words);
-                Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
+                Map<String, List<WordFrequencyInfo>> wordFrequencyMap = initializeListMap(wordFrequencyInfoList);
                 List<WordFrequencyInfo> frequencyInfo = new ArrayList<>();
                 extractAndAddWordFrequencyInfo(wordFrequencyMap, frequencyInfo);
                 wordFrequencyInfoList = frequencyInfo;
@@ -50,7 +50,7 @@ public class WordFrequencyGame {
                 .map(word -> word.getValue() + SPACE_CHAR + word.getWord())
                 .collect(Collectors.joining(NEW_LINE_DELIMITER));
     }
-    private Map<String, List<WordFrequencyInfo>>getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
+    private Map<String, List<WordFrequencyInfo>> initializeListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
         return wordFrequencyInfoList.stream()
                 .collect(Collectors.groupingBy(WordFrequencyInfo::getValue, Collectors.toList()));
     }
