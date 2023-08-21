@@ -12,12 +12,11 @@ public class WordFrequencyGame {
 
     public String getResult(String inputStr) {
 
-        if (inputStr.split(SPACE_DELIMITER).length == 1) {
+        String[] words = inputStr.split(SPACE_DELIMITER);
+        if (words.length == 1) {
             return inputStr + SET_NUMBER_ONE;
         } else {
             try {
-                String[] words = inputStr.split(SPACE_DELIMITER);
-
                 List<WordFrequencyInfo> wordFrequencyInfoList = new ArrayList<>();
                 for (String word : words) {
                     WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(word, 1);
