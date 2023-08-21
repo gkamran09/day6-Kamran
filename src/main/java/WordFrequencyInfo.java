@@ -2,9 +2,9 @@ public class WordFrequencyInfo {
     private String value;
     private int count;
 
-    public WordFrequencyInfo(String initialWord, int i) {
+    public WordFrequencyInfo(String initialWord, int wordCount) {
         this.value = initialWord;
-        this.count = i;
+        this.count = wordCount;
     }
 
 
