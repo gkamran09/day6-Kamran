@@ -14,6 +14,8 @@ public class WordFrequencyGame {
     public String getResult(String inputString) {
 
         String[] words = inputString.split(SPACE_DELIMITER);
+
+        //TODO: this can be removed because this is not anymore at used
         if (words.length == 1) {
             return inputString + SET_NUMBER_ONE;
         }
@@ -42,18 +44,21 @@ public class WordFrequencyGame {
                 .collect(Collectors.toList());
     }
 
+    //TODO: suggestion: can remove this and use Collectors.groupingBy in extractWordFrequencyInfo to get the size of the words with same value Collectors.counting
     private List<WordFrequencyInfo> createWordFrequencyInfoList(String[] words) {
         return Arrays.stream(words)
                 .map(word -> new WordFrequencyInfo(word, 1))
                 .collect(Collectors.toList());
     }
 
+    //TODO: can use String.format to avoid creating a constant
     private static String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
         return wordFrequencyInfoList.stream()
                 .map(word -> word.getValue() + SPACE_CHAR + word.getWord())
                 .collect(Collectors.joining(NEW_LINE_DELIMITER));
     }
 
+    //TODO: rename this method what does this initialize?
     private Map<String, List<WordFrequencyInfo>> initializeListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
         return wordFrequencyInfoList.stream()
                 .collect(Collectors.groupingBy(WordFrequencyInfo::getValue, Collectors.toList()));
