@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class WordFrequencyGameTest {
 
+    //TODO: remove throws exception since it is not used anymore
     @Test
     public void should_get_the_1_when_input_the() throws Exception {
         //Given
